@@ -1,0 +1,10 @@
+{
+    "files.associations": {
+        "xstring": "cpp",
+        "iostream": "cpp",
+        "type_traits": "cpp",
+        "ostream": "cpp",
+        "istream": "cpp"
+    },
+    "C_Cpp.errorSquiggles": "Disabled"
+}

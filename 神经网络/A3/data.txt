@@ -1,0 +1,14 @@
+ensemble
+99.371429%
+99.307143%
+99.314286%
+99.328571%
+99.300000%
+
+Accuracy: 99.128571 test loss: 1.473091
+Accuracy: 99.300000 test loss: 1.471722
+Accuracy: 99.271429 test loss: 1.471997
+Accuracy: 99.328571 test loss: 1.471731
+avg acc: 99.228571
+Accuracy: 99.192857 test loss: 1.473232
+Accuracy: 99.178571 test loss: 1.473105

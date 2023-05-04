@@ -1,0 +1,22 @@
+1. 在内核中启动时分配对象，此后不能再分配。
+2. Runtime.s 包含用汇编语言编写的例程，包含程序入口与中断向量
+3. 例程执行时调用main.c的main函数
+4. List实现了操作系统的链表
+5. List主要的键类名为Thread.它是线程的核心，包含线程调度（状态转换）和时间切片相关函数
+         Thread中的FatalError函数就是进程终止函数，打印可能的错误。随后进入blitz的命令行模式，可能需要输入st查看函数和方法处于活动状态。
+         Thread中的SetInterruptsTo用于改变CPU的中断标志（开中断或关中断），返回一个变量提示现在是什么状态。
+6. 线程五种状态：JUST_CREATED、READY、RUNNING、BLOCKED和UNUSED
+7. 每个线程都有堆栈（系统堆栈），堆栈放置在systemStack字段中的thread对象中。该堆栈只用于内核例程，而之后的实验中用户程序在各自的虚拟空间中有属于自己的堆栈。
+8. Thread对象还存储CPU的状态，在线程切换时所有数据保存在thread对象，这些字段（regs和stackTop）由名为Switch的代码例程使用。（PCB？）
+9. Thread对象还存储指向函数的指针(initialFunction)和函数的实参(initialArgument字段)，该指针指向现成的main函数，不同的线程执行不同的main函数。
+10. initialArgument字段表示线程的编号。
+11. 使用Thread对象中的Fork方法启动一个初始化的新线程，这会使他进入ready状态（加入readyList，这是一个全局变量）。
+12. currentThread：全局变量，表示状态为RUNNING的唯一一个线程。
+13. Thread对象中的Yield方法：只能在当前运行的线程上调用，作用为切换到其他线程。
+         ① 禁用中断：防止干扰。
+         ② 在readylist找下一个线程（若没有其他线程，则yield实际上是nop）
+         ③ 使当前线程变为READY
+         ④ 将当前线程添加到readyList尾部
+         ⑤ 运行下一个线程(Run方法)
+14. Thread对象中的Run方法：先检查线程堆栈溢出，再调用Switch方法执行线程切换。
+15. Thread对象中的Switch方法：返回发生在另一个进程的另一个函数。
